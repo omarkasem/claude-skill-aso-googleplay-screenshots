@@ -1,12 +1,12 @@
-# ASO App Store Screenshots
+# ASO Play Store Screenshots
 
-A Claude Code skill that generates high-converting App Store screenshots for your iOS app. It analyzes your codebase, identifies core benefits, and creates professional screenshot images using AI.
+A Claude Code skill that generates high-converting Google Play Store screenshots for your Android app. It analyzes your codebase, identifies core benefits, and creates professional screenshot images using AI.
 
 ## What It Does
 
 1. **Benefit Discovery** — Analyzes your app's codebase to identify the 3-5 core benefits that drive downloads
-2. **Screenshot Pairing** — Reviews your simulator screenshots, rates them, and pairs each with the best benefit
-3. **Generation** — Creates polished App Store screenshots using a two-stage process: deterministic scaffolding (compose.py) + AI enhancement (Nano Banana Pro via Gemini MCP)
+2. **Screenshot Pairing** — Reviews your app screenshots, rates them, and pairs each with the best benefit
+3. **Generation** — Creates polished Play Store screenshots using a two-stage process: deterministic scaffolding (compose.py) + AI enhancement (Nano Banana Pro via Gemini MCP)
 4. **Showcase** — Generates a preview image with all screenshots side-by-side
 
 ## Installation
@@ -14,7 +14,7 @@ A Claude Code skill that generates high-converting App Store screenshots for you
 ### 1. Add the skill to Claude Code
 
 ```bash
-claude install-skill github.com/adamlyttleapps/claude-skill-aso-appstore-screenshots
+claude install-skill github.com/adamlyttleapps/claude-skill-aso-playstore-screenshots
 ```
 
 ### 2. Install Python dependencies
@@ -25,11 +25,16 @@ pip install Pillow
 
 ### 3. Font requirement
 
-The skill uses **SF Pro Display Black** for headline text. On macOS, install it from [Apple's developer fonts](https://developer.apple.com/fonts/). The expected path is:
+The skill uses a heavy/black weight sans-serif font for headline text. It searches for fonts in this order:
 
-```
-/Library/Fonts/SF-Pro-Display-Black.otf
-```
+| Priority | Font | Path |
+|----------|------|------|
+| 1 | SF Pro Display Black | `/Library/Fonts/SF-Pro-Display-Black.otf` (macOS) |
+| 2 | Inter Black | `/usr/share/fonts/truetype/inter/Inter-Black.ttf` |
+| 3 | Roboto Black | `/usr/share/fonts/truetype/roboto/Roboto-Black.ttf` |
+| 4 | Noto Sans Black | `/usr/share/fonts/google-noto/NotoSans-Black.ttf` |
+
+On macOS, install SF Pro from [Apple's developer fonts](https://developer.apple.com/fonts/). On Linux, install one of the alternatives via your package manager or download from [Google Fonts](https://fonts.google.com/).
 
 ### 4. Set up Gemini MCP (for AI enhancement)
 
@@ -46,7 +51,7 @@ Then add it to your Claude Code MCP config (`~/.claude/settings.json` or project
 From within your app's project directory, run:
 
 ```
-/aso-appstore-screenshots
+/aso-playstore-screenshots
 ```
 
 The skill will guide you through each phase interactively. Progress is saved to Claude Code's memory system, so you can resume across conversations.
@@ -57,7 +62,7 @@ The skill will guide you through each phase interactively. Progress is saved to 
 
 Rather than generating screenshots from scratch (which produces inconsistent results), the skill uses a two-stage approach:
 
-1. **compose.py** creates a deterministic scaffold with exact text positioning, device frame, and your simulator screenshot composited inside
+1. **compose.py** creates a deterministic scaffold with exact text positioning, device frame, and your app screenshot composited inside
 2. **Nano Banana Pro** (via Gemini MCP) enhances the scaffold — adding a photorealistic device frame, breakout elements, and visual polish
 
 This ensures consistent layout across all screenshots while letting AI handle the creative enhancement.
@@ -70,15 +75,15 @@ Screenshots are saved to a `screenshots/` directory in your project:
 screenshots/
   01-benefit-slug/          ← working versions
     scaffold.png            ← deterministic compose.py output
-    v1.png, v2.png, v3.png  ← AI-enhanced versions
-    v1-resized.png, ...     ← cropped to App Store dimensions
+    v1.jpg, v2.jpg, v3.jpg  ← AI-enhanced versions
+    v1-resized.jpg, ...     ← resized to Play Store dimensions
   final/                    ← approved screenshots, ready to upload
-    01-benefit-slug.png
-    02-benefit-slug.png
+    01-benefit-slug.jpg
+    02-benefit-slug.jpg
   showcase.png              ← preview image with all screenshots
 ```
 
-The `final/` folder contains App Store-ready screenshots at exact Apple dimensions (default: 1290×2796px for iPhone 6.7").
+The `final/` folder contains Play Store-ready screenshots at Google's recommended dimensions (default: 1080×1920px, portrait 9:16).
 
 ## Files
 
@@ -88,7 +93,7 @@ The `final/` folder contains App Store-ready screenshots at exact Apple dimensio
 | `compose.py` | Deterministic scaffold generator (Pillow-based) |
 | `generate_frame.py` | Generates the device frame template |
 | `showcase.py` | Generates the side-by-side showcase image |
-| `assets/device_frame.png` | Pre-rendered iPhone device frame template |
+| `assets/device_frame.png` | Pre-rendered Android device frame template |
 
 ## License
 

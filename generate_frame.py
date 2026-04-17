@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate iPhone device frame template PNG.
+Generate Android (Pixel) device frame template PNG.
 Output: assets/device_frame.png — standalone device image (not positioned on canvas).
 compose.py positions this dynamically based on text height.
 """
@@ -8,15 +8,14 @@ compose.py positions this dynamically based on text height.
 from PIL import Image, ImageDraw, ImageChops
 
 # ── Device dimensions ───────────────────────────────────────────────
-# Width is ~80% of 1290 canvas, matching reference screenshots
-DEVICE_W = 1030
-DEVICE_H = 2800           # tall enough to bleed off any canvas
-DEVICE_CORNER_R = 77
-BEZEL = 15
-SCREEN_CORNER_R = 62
-DI_W = 130               # Dynamic Island width
-DI_H = 38                # Dynamic Island height
-DI_TOP = 14              # offset from top of screen
+# Width is ~80% of 1080 canvas, matching reference screenshots
+DEVICE_W = 864
+DEVICE_H = 1920           # tall enough to bleed off any canvas
+DEVICE_CORNER_R = 50
+BEZEL = 12
+SCREEN_CORNER_R = 38
+PUNCH_HOLE_R = 14         # Front camera punch-hole radius
+PUNCH_HOLE_TOP = 28       # offset from top of screen
 
 SCREEN_W = DEVICE_W - 2 * BEZEL
 SCREEN_H = DEVICE_H - 2 * BEZEL
@@ -50,12 +49,12 @@ def generate():
     )
     frame.putalpha(ImageChops.multiply(frame.getchannel("A"), cutout))
 
-    # ── Dynamic Island ──────────────────────────────────────────────
-    di_x = (DEVICE_W - DI_W) // 2
-    di_y = screen_y + DI_TOP
-    ImageDraw.Draw(frame).rounded_rectangle(
-        [di_x, di_y, di_x + DI_W, di_y + DI_H],
-        radius=DI_H // 2,
+    # ── Punch-hole camera (centered at top of screen) ───────────────
+    ph_x = DEVICE_W // 2
+    ph_y = screen_y + PUNCH_HOLE_TOP + PUNCH_HOLE_R
+    ImageDraw.Draw(frame).ellipse(
+        [ph_x - PUNCH_HOLE_R, ph_y - PUNCH_HOLE_R,
+         ph_x + PUNCH_HOLE_R, ph_y + PUNCH_HOLE_R],
         fill=(0, 0, 0, 255),
     )
 
@@ -65,22 +64,17 @@ def generate():
 
     # Power button (right side)
     fd2.rounded_rectangle(
-        [DEVICE_W, 340, DEVICE_W + 4, 460],
+        [DEVICE_W, 280, DEVICE_W + 4, 380],
         radius=2, fill=btn_color,
     )
     # Volume up (left side)
     fd2.rounded_rectangle(
-        [-4, 280, 0, 360],
+        [-4, 260, 0, 340],
         radius=2, fill=btn_color,
     )
     # Volume down (left side)
     fd2.rounded_rectangle(
-        [-4, 380, 0, 460],
-        radius=2, fill=btn_color,
-    )
-    # Silent switch (left side)
-    fd2.rounded_rectangle(
-        [-4, 180, 0, 220],
+        [-4, 360, 0, 440],
         radius=2, fill=btn_color,
     )
 

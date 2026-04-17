@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-App Store Screenshot Composer
+Google Play Store Screenshot Composer
 Composites headline text, device frame template, and app screenshot
-into a pixel-perfect 1290×2796 App Store Connect image.
+into a pixel-perfect 1080×1920 Google Play Console image.
 
 The device frame is positioned dynamically based on text height,
-matching the proportions seen in professional App Store screenshots.
+matching the proportions seen in professional Play Store screenshots.
 """
 
 import argparse
@@ -13,29 +13,43 @@ import os
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
 # ── Canvas ──────────────────────────────────────────────────────────
-CANVAS_W = 1290
-CANVAS_H = 2796
+CANVAS_W = 1080
+CANVAS_H = 1920
 
 # ── Device template constants (must match generate_frame.py) ───────
-DEVICE_W = 1030
-BEZEL = 15
-SCREEN_W = DEVICE_W - 2 * BEZEL    # 1000
-SCREEN_CORNER_R = 62
+DEVICE_W = 864
+BEZEL = 12
+SCREEN_W = DEVICE_W - 2 * BEZEL    # 840
+SCREEN_CORNER_R = 38
 
 # ── Layout ──────────────────────────────────────────────────────────
-DEVICE_Y = 720                       # device top position (fixed)
-MIN_TEXT_DEVICE_GAP = 40             # minimum gap between text bottom and device top
+DEVICE_Y = 500                       # device top position (fixed)
+MIN_TEXT_DEVICE_GAP = 30             # minimum gap between text bottom and device top
 
 # ── Typography ──────────────────────────────────────────────────────
-VERB_SIZE_MAX = 256
-VERB_SIZE_MIN = 150
-DESC_SIZE = 124
-VERB_DESC_GAP = 20
-DESC_LINE_GAP = 24
+VERB_SIZE_MAX = 180
+VERB_SIZE_MIN = 100
+DESC_SIZE = 86
+VERB_DESC_GAP = 14
+DESC_LINE_GAP = 16
 MAX_TEXT_W = int(CANVAS_W * 0.92)
 MAX_VERB_W = int(CANVAS_W * 0.92)
 
-FONT_PATH = "/Library/Fonts/SF-Pro-Display-Black.otf"
+# Font: try SF Pro Display first (macOS), then fall back to common alternatives
+FONT_CANDIDATES = [
+    "/Library/Fonts/SF-Pro-Display-Black.otf",
+    "/usr/share/fonts/truetype/inter/Inter-Black.ttf",
+    "/usr/share/fonts/truetype/roboto/Roboto-Black.ttf",
+    "/usr/share/fonts/google-noto/NotoSans-Black.ttf",
+]
+FONT_PATH = None
+for _fp in FONT_CANDIDATES:
+    if os.path.isfile(_fp):
+        FONT_PATH = _fp
+        break
+if FONT_PATH is None:
+    FONT_PATH = FONT_CANDIDATES[0]  # will error if none found
+
 FRAME_PATH = os.path.join(os.path.dirname(__file__), "assets", "device_frame.png")
 
 
@@ -103,7 +117,7 @@ def compose(bg_hex, verb, desc, screenshot_path, output_path):
 
     # Device at fixed Y; text starts at fixed position
     device_y = DEVICE_Y
-    text_top = 200
+    text_top = 130
 
     # Draw text at centered position
     y = text_top
@@ -160,11 +174,11 @@ def compose(bg_hex, verb, desc, screenshot_path, output_path):
 
 
 def main():
-    p = argparse.ArgumentParser(description="Compose App Store screenshot")
+    p = argparse.ArgumentParser(description="Compose Google Play Store screenshot")
     p.add_argument("--bg", required=True, help="Background hex colour (#E31837)")
     p.add_argument("--verb", required=True, help="Action verb (TRACK)")
     p.add_argument("--desc", required=True, help="Benefit descriptor (TRADING CARD PRICES)")
-    p.add_argument("--screenshot", required=True, help="Simulator screenshot path")
+    p.add_argument("--screenshot", required=True, help="App screenshot path")
     p.add_argument("--output", required=True, help="Output file path")
     args = p.parse_args()
 

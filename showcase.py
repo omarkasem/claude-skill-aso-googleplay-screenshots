@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Showcase Image Generator
-Creates a preview image showing up to 3 final App Store screenshots
+Creates a preview image showing up to 3 final Google Play Store screenshots
 side-by-side on a white background with an optional GitHub link at the bottom.
 """
 

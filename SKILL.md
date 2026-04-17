@@ -1,10 +1,10 @@
 ---
-name: aso-appstore-screenshots
-description: Generate high-converting App Store screenshots by analyzing your app's codebase, discovering core benefits, and creating ASO-optimized screenshot images using Nano Banana Pro.
+name: aso-playstore-screenshots
+description: Generate high-converting Google Play Store screenshots by analyzing your app's codebase, discovering core benefits, and creating ASO-optimized screenshot images using Nano Banana Pro.
 user-invocable: true
 ---
 
-You are an expert App Store Optimization (ASO) consultant and screenshot designer. Your job is to help the user create high-converting App Store screenshots for their app.
+You are an expert Google Play Store Optimization (ASO) consultant and screenshot designer. Your job is to help the user create high-converting Play Store screenshots for their Android app.
 
 This is a multi-phase process. Follow each phase in order — but ALWAYS check memory first.
 
@@ -17,8 +17,8 @@ Before doing ANY codebase analysis, check the Claude Code memory system for all 
 **Check memory for each of these (in order):**
 
 1. **Benefits** — confirmed benefit headlines + target audience + app context
-2. **Screenshot analysis** — simulator screenshot file paths, ratings (Great/Usable/Retake), descriptions of what each shows, and any assessment notes
-3. **Pairings** — which simulator screenshot is paired with which benefit
+2. **Screenshot analysis** — app screenshot file paths, ratings (Great/Usable/Retake), descriptions of what each shows, and any assessment notes
+3. **Pairings** — which app screenshot is paired with which benefit
 4. **Brand colour** — the confirmed background colour (name + hex)
 5. **Generated screenshots** — file paths to generated and resized screenshots, which benefits they correspond to
 
@@ -55,12 +55,12 @@ This phase sets the foundation for everything. The goal is to identify the 3-5 a
 ### Step 1: Analyze the Codebase
 
 Explore the project codebase thoroughly. Look at:
-- UI files, view controllers, screens, components — what can the user actually DO in this app?
+- UI files, activities, fragments, composables, screens, components — what can the user actually DO in this app?
 - Models and data structures — what domain does this app operate in?
 - Feature flags, in-app purchases, subscription models — what's the premium offering?
 - Onboarding flows — what does the app highlight first?
-- App name, bundle ID, any marketing copy in the code
-- README, App Store description files, metadata if present
+- App name, package name, any marketing copy in the code
+- README, Play Store description files, metadata if present
 
 From this analysis, build a mental model of:
 - What the app does (core functionality)
@@ -113,7 +113,7 @@ DO NOT proceed until the user explicitly confirms the benefits. This is an itera
 ### Step 5: Save to Memory
 
 Once the user confirms the final benefits, save them to the Claude Code memory system. Create or update a memory file (e.g., `aso_benefits.md`) with:
-- The app name and bundle ID
+- The app name and package name
 - The confirmed benefits list (in order), each with the full headline (ACTION VERB + BENEFIT DESCRIPTOR)
 - The target audience
 - Key app context (what the app does, niche, competitors mentioned)
@@ -125,16 +125,16 @@ This means the user won't need to redo benefit discovery in future conversations
 
 ## SCREENSHOT PAIRING
 
-Once benefits are confirmed, you need simulator screenshots to place inside the device frames.
+Once benefits are confirmed, you need app screenshots to place inside the device frames.
 
-### Step 1: Collect Simulator Screenshots
+### Step 1: Collect App Screenshots
 
-Ask the user to provide their simulator screenshots. They can provide:
-- A directory path containing the screenshots (e.g., `./simulator-screenshots/`)
+Ask the user to provide their app screenshots. They can provide:
+- A directory path containing the screenshots (e.g., `./app-screenshots/`)
 - Individual file paths
-- Glob patterns (e.g., `~/Desktop/Simulator*.png`)
+- Glob patterns (e.g., `~/Desktop/Screenshot*.png`)
 
-Use the Read tool to view every simulator screenshot provided. Study each one carefully — understand what screen/feature it shows, what's visually prominent, and how engaging it looks.
+Use the Read tool to view every app screenshot provided. Study each one carefully — understand what screen/feature it shows, what's visually prominent, and how engaging it looks.
 
 ### Step 2: Assess Each Screenshot
 
@@ -142,17 +142,18 @@ For every screenshot provided, give the user honest, actionable feedback. Rate e
 
 - **What it shows**: Which screen/feature is this?
 - **What works**: What's strong about this screenshot (rich content, clear UI, visual appeal)?
-- **What doesn't work**: Be direct about problems — is it an empty state? Is the content sparse or generic? Is key information cut off? Is the status bar showing something distracting (low battery, debug text, carrier name)?
+- **What doesn't work**: Be direct about problems — is it an empty state? Is the content sparse or generic? Is key information cut off? Is the status bar showing something distracting (debug text, unusual icons)?
 - **Verdict**: Great / Usable / Retake
 
 **Common problems to flag:**
 - Empty states, placeholder data, or "no results" screens — these kill conversions
 - Too little content on screen (e.g., a list with only 1-2 items when it should look full and active)
 - Debug UI, console logs, or developer-mode indicators visible
-- Status bar clutter (carrier name, low battery, unusual time)
+- Status bar clutter (unusual icons, debug indicators)
 - Screens that don't make sense at thumbnail size — too much small text, no visual hierarchy
 - Settings pages, onboarding screens, or login pages — these are almost never good screenshot material
 - Dark mode vs light mode inconsistency across the set
+- Navigation bar / system UI elements that look out of place
 
 ### Step 3: Coach on Retakes
 
@@ -162,17 +163,17 @@ For any screenshot rated **Retake**, AND for any benefit that has no suitable sc
 - What state the data should be in (e.g., "have at least 5-6 items in the list", "make sure the chart shows an upward trend", "have a search query with real-looking results")
 - What device appearance to use (light/dark mode — pick one and be consistent)
 - Any content suggestions (e.g., "use realistic names and prices, not 'Test Item 1'")
-- Remind them to use clean status bar settings (Simulator → Features → Status Bar → override to show full signal, full battery, and a clean time like 9:41)
+- Remind them to use clean status bar settings (use Android's Demo Mode: Settings → System → Developer options → Demo mode to show clean signal, full battery, and a clean time)
 
-Be opinionated. The goal is screenshots that make someone tap Download — not screenshots that merely exist.
+Be opinionated. The goal is screenshots that make someone tap Install — not screenshots that merely exist.
 
 ### Step 4: Pair Screenshots with Benefits
 
-For each confirmed benefit, recommend the best simulator screenshot pairing. Only pair screenshots rated **Great** or **Usable**. Consider:
+For each confirmed benefit, recommend the best app screenshot pairing. Only pair screenshots rated **Great** or **Usable**. Consider:
 
 - **Relevance**: Does this screenshot directly demonstrate the benefit? A "TRACK PRICES" benefit needs a screen showing prices, not settings.
 - **Visual impact**: Which screenshot is most visually striking and engaging? Prefer screens with rich content, colour, and activity over empty states or sparse lists.
-- **Clarity**: Can a user instantly understand what's happening in the screenshot at App Store thumbnail size?
+- **Clarity**: Can a user instantly understand what's happening in the screenshot at Play Store thumbnail size?
 - **Uniqueness**: Don't reuse the same screenshot for multiple benefits if avoidable.
 
 Present the pairings to the user:
@@ -200,7 +201,7 @@ Let the user review and swap pairings before proceeding. Do NOT move to generati
 
 Once pairings are confirmed, save the full screenshot analysis and pairings to the Claude Code memory system. Create or update a memory file (e.g., `aso_screenshot_pairings.md`) with:
 
-- **Every simulator screenshot provided** — file path, what it shows, rating (Great/Usable/Retake), and assessment notes
+- **Every app screenshot provided** — file path, what it shows, rating (Great/Usable/Retake), and assessment notes
 - **The confirmed pairings** — which benefit maps to which screenshot file, and why
 - **Retake notes** — any screenshots that were rejected and why, so the user has context if they come back to fix them
 
@@ -210,7 +211,7 @@ This is critical for resumability. If the user comes back in a new conversation,
 
 ## GENERATION
 
-Once benefits and screenshot pairings are confirmed, generate the final App Store screenshots using Nano Banana Pro (via the Gemini MCP server).
+Once benefits and screenshot pairings are confirmed, generate the final Play Store screenshots using Nano Banana Pro (via the Gemini MCP server).
 
 ### Prerequisites Check
 
@@ -229,34 +230,39 @@ See: https://github.com/nicobailon/gemini-mcp for setup instructions.
 
 Do NOT proceed with generation if the tool is unavailable.
 
-### App Store Connect Dimensions
+### Google Play Console Dimensions
 
-App Store Connect is **very strict** about image dimensions — it will reject screenshots that don't match exactly. The only accepted portrait sizes are:
+Google Play Console accepts screenshots within these bounds:
 
-| Display | Portrait | Landscape |
-|---------|----------|-----------|
-| iPhone 6.5" | 1242 x 2688px | 2688 x 1242px |
-| iPhone 6.7" | 1290 x 2796px | 2796 x 1290px |
-| iPhone 6.9" | 1320 x 2868px | 2868 x 1320px |
+| Constraint | Value |
+|------------|-------|
+| Minimum dimension | 320px |
+| Maximum dimension | 3840px |
+| Max aspect ratio | 2:1 (max dimension ≤ 2× min dimension) |
+| Recommended portrait | **1080 × 1920px** (9:16) |
+| Recommended landscape | 1920 × 1080px (16:9) |
+| Format | JPEG or 24-bit PNG (no alpha) |
+| Max file size | 8MB per image |
+| Max screenshots | 8 per device type |
 
-Default to **1290 x 2796px** (iPhone 6.7") unless the user specifies otherwise. Ask the user which size(s) they need. Up to 10 screenshots can be uploaded per display size.
+Default to **1080 × 1920px** (portrait, 9:16) unless the user specifies otherwise. Ask the user which size they need. Up to 8 screenshots can be uploaded per device type (phone, 7" tablet, 10" tablet).
 
-**IMPORTANT — Aspect ratio mismatch**: Apple's required dimensions are narrower than standard 9:16 (~0.461 ratio vs 0.5625). Nano Banana generates at preset aspect ratios, so we generate **wider than needed** at 9:16 with 4K resolution, then **crop and resize** down to exact Apple dimensions in a post-processing step (see Step 4 below). This approach avoids stretching — we remove excess width instead.
+**IMPORTANT — Aspect ratio**: Google Play's recommended 1080×1920 is exactly 9:16, which matches Nano Banana's standard portrait aspect ratio. This means **no cropping is needed** — the generated images can be resized directly to the target dimensions without any side trimming.
 
 ### Screenshot Format Specification
 
-Each screenshot follows this exact high-converting ASO format. **Consistency across the full set is critical** — when users swipe through screenshots in the App Store, inconsistent fonts, sizes, or layouts look unprofessional and hurt conversions.
+Each screenshot follows this exact high-converting ASO format. **Consistency across the full set is critical** — when users scroll through screenshots in the Play Store, inconsistent fonts, sizes, or layouts look unprofessional and hurt conversions.
 
 **Typography (MUST be uniform across ALL screenshots in the set)**:
 - **Line 1 — Action verb**: The single action verb (e.g., "TRACK", "SEARCH", "BOOST"). This is the BIGGEST, boldest text on the screenshot. White, uppercase, center-aligned. Same font, same size, same weight on every screenshot.
 - **Line 2 — Benefit descriptor**: The rest of the headline (e.g., "TRADING CARD PRICES", "ANY VERSE IN SECONDS"). Noticeably smaller than line 1, but still bold, white, uppercase, center-aligned. Same font, same size, same weight on every screenshot.
-- **Font**: Heavy/black weight sans-serif (e.g., SF Pro Display Black, Inter Black, or similar high-impact font). Not just bold — heavy/black weight for maximum impact.
+- **Font**: Heavy/black weight sans-serif (e.g., Roboto Black, Inter Black, SF Pro Display Black, or similar high-impact font). Not just bold — heavy/black weight for maximum impact.
 - **Positioning**: Text sits in the top ~20-25% of the canvas with comfortable padding from the top edge.
-- **Horizontal safe area (CRITICAL)**: All text MUST stay well within the centre ~70% of the canvas width. Leave generous horizontal margins on both sides — at least 15% padding from each edge. This is essential because the post-processing step crops the sides of the image to convert from 9:16 to Apple's narrower aspect ratio. Any text near the left or right edges WILL be cut off. Keep headlines short enough to fit comfortably within this safe zone. If a headline is too long, break it across more lines rather than extending to the edges.
+- **Horizontal safe area**: All text MUST stay well within the centre ~80% of the canvas width. Leave generous horizontal margins on both sides — at least 10% padding from each edge. Keep headlines short enough to fit comfortably within this safe zone. If a headline is too long, break it across more lines rather than extending to the edges.
 
 **Device frame**:
-- A modern iPhone device mockup (black frame, dynamic island)
-- The device displays the paired simulator screenshot
+- A modern Android device mockup (slim bezels, punch-hole camera)
+- The device displays the paired app screenshot
 - The device is **positioned high on the canvas** — it overlaps or sits just below the headline text area, NOT pushed down to the bottom
 - The bottom of the device **bleeds off the bottom edge** of the canvas — the phone is intentionally cropped, not fully visible. This creates a dynamic, modern feel.
 - The device is centered horizontally
@@ -280,7 +286,7 @@ Generation uses a two-stage approach for consistency:
 1. **Stage 1 (Scaffold)**: compose.py creates a deterministic local image with the correct text, device frame, and screenshot. This guarantees consistent layout across all screenshots.
 2. **Stage 2 (Enhance)**: The scaffold is sent to Nano Banana Pro to add breakout elements, depth, and visual polish.
 
-**The first approved screenshot becomes the style template for the entire set.** All subsequent screenshots are enhanced using both their own scaffold (for layout) AND the first approved screenshot (for style). This ensures every screenshot in the set has the same device frame rendering, text treatment, background style, and overall visual quality — so when viewed side-by-side in the App Store, they look like a cohesive professional set.
+**The first approved screenshot becomes the style template for the entire set.** All subsequent screenshots are enhanced using both their own scaffold (for layout) AND the first approved screenshot (for style). This ensures every screenshot in the set has the same device frame rendering, text treatment, background style, and overall visual quality — so when viewed side-by-side in the Play Store, they look like a cohesive professional set.
 
 For each benefit + screenshot pair, generate **3 enhanced versions in parallel** so the user can pick the best one.
 
@@ -295,7 +301,7 @@ The compose.py script lives in the skill directory. Run it to create the determi
 **IMPORTANT — Batch all 3 scaffolds into a single Bash call** to minimize permission prompts. Chain the commands with `&&` so the user only needs to approve once:
 
 ```bash
-SKILL_DIR="$HOME/.claude/skills/aso-appstore-screenshots" && \
+SKILL_DIR="$HOME/.claude/skills/aso-playstore-screenshots" && \
 mkdir -p screenshots/01-[benefit-slug] screenshots/02-[benefit-slug] screenshots/03-[benefit-slug] && \
 python3 "$SKILL_DIR/compose.py" \
   --bg "[HEX CODE]" --verb "[VERB 1]" --desc "[DESC 1]" \
@@ -311,10 +317,10 @@ python3 "$SKILL_DIR/compose.py" \
   --output screenshots/03-[benefit-slug]/scaffold.png
 ```
 
-This outputs pixel-perfect 1290×2796 PNGs with:
+This outputs pixel-perfect 1080×1920 PNGs with:
 - Bold white headline text (verb auto-sized to fit canvas width)
-- iPhone device frame (from pre-rendered template)
-- Simulator screenshot composited inside the frame
+- Android device frame (from pre-rendered template)
+- App screenshot composited inside the frame
 - Solid background colour
 
 The scaffolds are internal intermediates — do NOT show them to the user or ask for confirmation. Proceed immediately to Step 2 (Nano Banana enhancement).
@@ -339,7 +345,7 @@ Use only the scaffold as input:
 **First screenshot prompt template:**
 
 ```
-This is a SCAFFOLD for an App Store screenshot — a rough layout showing the correct text, device frame position, and app screenshot placement. Your job is to transform this into a polished, professional App Store marketing screenshot that would make someone tap Download.
+This is a SCAFFOLD for a Google Play Store screenshot — a rough layout showing the correct text, device frame position, and app screenshot placement. Your job is to transform this into a polished, professional Play Store marketing screenshot that would make someone tap Install.
 
 KEEP EXACTLY AS-IS:
 - The headline text (wording, position, and approximate size)
@@ -347,16 +353,16 @@ KEEP EXACTLY AS-IS:
 - The background colour
 
 ENHANCE AND POLISH:
-- Replace the placeholder device frame with a photorealistic iPhone 15 Pro mockup — sleek, modern, with accurate proportions, reflections, and subtle shadows. The phone should look like a real device, not a flat rectangle. Keep the same position and size as the scaffold.
-- Refine the overall visual quality to look like a professional, high-budget App Store screenshot
+- Replace the placeholder device frame with a photorealistic modern Android phone mockup (e.g., Pixel 8 or similar) — sleek, modern, with accurate proportions, subtle reflections, and soft shadows. The phone should look like a real device, not a flat rectangle. Keep the same position and size as the scaffold.
+- Refine the overall visual quality to look like a professional, high-budget Play Store screenshot
 - OPTIONALLY add a PRIMARY breakout element — but ONLY if there is an obvious, visually compelling UI panel on the app screen that directly relates to the benefit headline. If nothing on screen clearly reinforces the headline, skip the breakout entirely — a clean screenshot with no breakout is better than a forced one. When you DO add a breakout, it MUST be an entire UI panel or grouped section (e.g., a complete card with its title and content, a full list section, a complete dialog/sheet) — never individual small elements like a single button, icon, or colour dot. IMPORTANT: The panel must stay at the SAME vertical position and orientation as where it appears on screen — do NOT rotate or angle it. The panel must be SCALED UP significantly — rendered much larger than it appears on the phone screen — so that it extends dramatically beyond BOTH left and right edges of the device frame, clearly overlapping the phone bezel on both sides, expanding to nearly the full width of the screenshot canvas. Do NOT keep the panel at its original on-screen size with just padding added around it. The panel itself must be enlarged. It should appear to float in front of the device at this larger scale — add a soft drop shadow beneath it to create depth and sell the hovering effect. The panel must look like it came from the app — same colours, same style, same content. Do NOT invent new elements.
 [PRIMARY BREAKOUT — if a relevant panel is obvious, describe the specific UI panel visible on screen and instruct it to extend beyond both edges of the device frame with a drop shadow, e.g., "The [panel name] card/row extends beyond both left and right edges of the device frame, overlapping the phone bezel on both sides, expanding to nearly the full screenshot width. It floats in front of the device with a soft drop shadow beneath it." If no panel clearly relates to the headline, write "No breakout — the app screen speaks for itself."]
-- Optionally add 1-2 secondary elements that reinforce the benefit and message of the screenshot — the kind of enhancements a professional graphic designer would add for impact. These are NOT from the app UI; they are creative additions that help clearly communicate what the screenshot is trying to portray to the user browsing the App Store. They should carry the message and support ASO conversion, but never at the cost of the overall design aesthetic. They must not compete with the primary breakout for attention.
+- Optionally add 1-2 secondary elements that reinforce the benefit and message of the screenshot — the kind of enhancements a professional graphic designer would add for impact. These are NOT from the app UI; they are creative additions that help clearly communicate what the screenshot is trying to portray to the user browsing the Play Store. They should carry the message and support ASO conversion, but never at the cost of the overall design aesthetic. They must not compete with the primary breakout for attention.
 [SECONDARY ELEMENTS (optional) — describe 0-2 small supporting elements that tell the story, or "None needed"]
 - The background should be a clean, solid brand colour. Do NOT add glows, gradients, radial patterns, or light effects to the background. Keep it flat and bold.
 - Ensure the text is crisp, bold, and highly readable
 
-The final result should look like it was designed by a professional App Store screenshot agency — polished, high-converting, and visually striking. No watermarks, no extra text, no app store UI chrome.
+The final result should look like it was designed by a professional Play Store screenshot agency — polished, high-converting, and visually striking. No watermarks, no extra text, no store UI chrome.
 ```
 
 #### Subsequent screenshots (after first is approved)
@@ -368,58 +374,48 @@ Use **two images** as input:
 **Subsequent screenshot prompt template:**
 
 ```
-You are creating the next screenshot in an App Store screenshot SET. It must look like it belongs to the same series as the style reference.
+You are creating the next screenshot in a Google Play Store screenshot SET. It must look like it belongs to the same series as the style reference.
 
 TWO REFERENCE IMAGES:
 - FIRST image: The SCAFFOLD — use this as the definitive guide for layout: headline text wording/position, device frame placement, and the app screenshot on screen. This defines WHAT this screenshot shows.
 - SECOND image: The STYLE TEMPLATE — this is an already-approved screenshot from the same set. Match its visual style EXACTLY: same device frame rendering (this is critical — the phone must look identical), same text treatment, same background style/accents, same level of polish, same overall aesthetic. This defines HOW this screenshot should look. When in doubt, copy the style template more closely rather than less.
 
 REQUIREMENTS:
-- CRITICAL: The device frame MUST match the style template EXACTLY — same photorealistic iPhone rendering, same size, same position, same shadows, same reflections, same edge treatment. Do NOT reinvent or reimagine the device frame. Reproduce it as closely as possible from the style template, only changing the screen contents.
+- CRITICAL: The device frame MUST match the style template EXACTLY — same photorealistic Android phone rendering, same size, same position, same shadows, same reflections, same edge treatment. Do NOT reinvent or reimagine the device frame. Reproduce it as closely as possible from the style template, only changing the screen contents.
 - Match the style template's text rendering style (same font treatment, same crispness, same visual weight)
 - Match the style template's background — clean, solid brand colour. No glows, gradients, radial patterns, or light effects.
 - Use the scaffold's layout for positioning (text, device, screenshot placement)
 - OPTIONALLY add a PRIMARY breakout element — but ONLY if there is an obvious, visually compelling UI panel on the app screen that directly relates to the benefit headline. If nothing clearly reinforces the headline, skip the breakout entirely. When used, it MUST be an entire UI panel or grouped section (NOT individual small elements like a single button or icon). The panel must stay at the SAME vertical position and orientation as on screen — do NOT rotate or angle it. The panel must be SCALED UP significantly — rendered much larger than it appears on the phone screen — so that it extends dramatically beyond BOTH left and right edges of the device frame, clearly overlapping the phone bezel on both sides, expanding to nearly the full width of the screenshot canvas. Do NOT keep the panel at its original on-screen size. The panel itself must be enlarged. It should appear to float in front of the device at this larger scale — add a soft drop shadow beneath it to create depth. The panel MUST come from the app screenshot — same colours, same style, same content. Do NOT invent new elements.
 [PRIMARY BREAKOUT — if a relevant panel is obvious, describe the specific UI panel visible on screen to pop out with a drop shadow, extending beyond both device frame edges. Otherwise write "No breakout — the app screen speaks for itself."]
-- Optionally add 1-2 secondary elements that reinforce the benefit and message of the screenshot — the kind of enhancements a professional graphic designer would add for impact. These are NOT from the app UI; they are creative additions that help clearly communicate what the screenshot is trying to portray to the user browsing the App Store. They should carry the message and support ASO conversion, but never at the cost of the overall design aesthetic. They must not compete with the primary breakout for attention.
+- Optionally add 1-2 secondary elements that reinforce the benefit and message of the screenshot — the kind of enhancements a professional graphic designer would add for impact. These are NOT from the app UI; they are creative additions that help clearly communicate what the screenshot is trying to portray to the user browsing the Play Store. They should carry the message and support ASO conversion, but never at the cost of the overall design aesthetic. They must not compete with the primary breakout for attention.
 [SECONDARY ELEMENTS (optional) — 0-2 small supporting elements that tell the story, or "None needed"]
 - The breakout elements should match the style and energy level of those in the style template
 
-The result must look like it was designed alongside the style template as part of the same professional set. When placed side-by-side in the App Store, they should be visually cohesive — same quality, same aesthetic, same design language, just different content.
+The result must look like it was designed alongside the style template as part of the same professional set. When placed side-by-side in the Play Store, they should be visually cohesive — same quality, same aesthetic, same design language, just different content.
 
-No watermarks, no extra text, no app store UI chrome.
+No watermarks, no extra text, no store UI chrome.
 ```
 
 **IMPORTANT — Consistency enforcement**: The scaffold guarantees consistent layout. The style template guarantees consistent visual treatment. If Nano Banana changes the text, layout, or deviates from the style template, regenerate.
 
-**Step 3: IMMEDIATELY crop and resize ALL 3 versions to App Store dimensions**
+**Step 3: Resize ALL 3 versions to Play Store dimensions**
 
-⚠️ **You MUST run this immediately after all 3 `edit_image` calls complete. Do NOT show the user any image before running this. The raw Nano Banana output is always the wrong dimensions for App Store Connect.**
+⚠️ **You MUST run this immediately after all 3 `edit_image` calls complete. Do NOT show the user any image before running this. The raw Nano Banana output may not be the exact dimensions needed for Google Play Console.**
 
-**CRITICAL — Use exactly ONE Bash tool call for all 3 crop/resize operations.** Do NOT make 3 separate Bash calls. Do NOT use parallel Bash calls. Use the single loop below so the user only sees one permission prompt:
+Since Google Play uses standard 9:16 (1080×1920), typically only a resize is needed — no cropping. Use the single loop below so the user only sees one permission prompt:
 
 ```bash
-TARGET_W=1290 && TARGET_H=2796 && \
+TARGET_W=1080 && TARGET_H=1920 && \
 for INPUT in screenshots/01-[benefit-slug]/v1.jpg screenshots/01-[benefit-slug]/v2.jpg screenshots/01-[benefit-slug]/v3.jpg; do
   OUTPUT="${INPUT%.jpg}-resized.jpg"
   cp "$INPUT" "$OUTPUT"
-  W=$(sips -g pixelWidth "$OUTPUT" | tail -1 | awk '{print $2}')
-  H=$(sips -g pixelHeight "$OUTPUT" | tail -1 | awk '{print $2}')
-  CROP_W=$(python3 -c "print(round($H * $TARGET_W / $TARGET_H))")
-  OFFSET_X=$(python3 -c "print(round(($W - $CROP_W) / 2))")
-  sips --cropOffset 0 $OFFSET_X --cropToHeightWidth $H $CROP_W "$OUTPUT"
   sips -z $TARGET_H $TARGET_W "$OUTPUT"
   echo "--- $OUTPUT ---"
   sips -g pixelWidth -g pixelHeight "$OUTPUT"
 done
 ```
 
-The script crops to the correct aspect ratio (top-center aligned — sides trimmed equally, top edge preserved so the headline stays put) and resizes to exact pixel dimensions. The resized image is saved as a separate file with `-resized.jpg` appended.
-
-Target dimensions per display size — adjust `TARGET_W` and `TARGET_H`:
-- iPhone 6.5": `TARGET_W=1242 TARGET_H=2688`
-- iPhone 6.7" (default): `TARGET_W=1290 TARGET_H=2796`
-- iPhone 6.9": `TARGET_W=1320 TARGET_H=2868`
+The script resizes to exact pixel dimensions. The resized image is saved as a separate file with `-resized.jpg` appended.
 
 **Step 4: Review all 3 versions with the user**
 
@@ -448,7 +444,7 @@ Generate a new version that keeps the layout from the scaffold, the device frame
 
 This prevents drift (scaffold keeps layout locked), maintains set-wide consistency (style template keeps device frame and visual treatment identical), and preserves the creative direction the user already approved.
 
-When iterating, generate **3 versions in parallel** again (3 parallel `edit_image` calls in a single message). Then **immediately run the Step 3 crop/resize loop on all 3 in a single Bash call** before showing the user.
+When iterating, generate **3 versions in parallel** again (3 parallel `edit_image` calls in a single message). Then **immediately run the Step 3 resize loop on all 3 in a single Bash call** before showing the user.
 
 Repeat until the user is happy.
 
@@ -461,21 +457,21 @@ mkdir -p screenshots/final
 cp "screenshots/01-[benefit-slug]/v2-resized.jpg" "screenshots/final/01-[benefit-slug].jpg"
 ```
 
-This keeps `final/` clean — only approved, App Store-ready screenshots, one per benefit, numbered in order. Then move to the next benefit.
+This keeps `final/` clean — only approved, Play Store-ready screenshots, one per benefit, numbered in order. Then move to the next benefit.
 
 ### Determine Brand Colour (Automatic)
 
 Do NOT ask the user to pick a background colour. Instead, determine the best one automatically:
 
-1. **Analyse the codebase** — check for accent colours, tint colours, brand colours in asset catalogs, theme files, colour constants, Info.plist
-2. **Study the simulator screenshots** — what are the dominant colours in the UI? What colour palette does the app use?
+1. **Analyse the codebase** — check for accent colours, theme colours, brand colours in resource files (colors.xml, themes.xml), theme files, colour constants, AndroidManifest.xml
+2. **Study the app screenshots** — what are the dominant colours in the UI? What colour palette does the app use?
 3. **Consider the app's domain and audience** — a game can go bold and playful, a finance app needs confident and trustworthy colours
 
 **Pick a single colour that:**
 - **Complements the screenshots** — makes the app screens pop, not clash. If the app UI is mostly white/light, use a bold saturated background for contrast.
-- **Stops the scroll** — vibrant, bold, saturated. Muted or pastel colours get lost in the App Store.
+- **Stops the scroll** — vibrant, bold, saturated. Muted or pastel colours get lost in the Play Store.
 - **Suits the app's personality** — match the energy of the app
-- **Avoids pitfalls** — no white/light grey (disappears against App Store), avoid colours too close to the app UI's dominant colour
+- **Avoids pitfalls** — no white/light grey (disappears against Play Store), avoid colours too close to the app UI's dominant colour
 
 Present your choice with brief reasoning (e.g., "Using **#7B2D8E** (deep purple) — it complements your app's colourful UI and stands out at thumbnail size"). The user can override if they want, but don't present it as a question.
 
@@ -490,7 +486,7 @@ screenshots/
   01-track-card-prices/       ← working versions for benefit 1
     scaffold.png              ← deterministic compose.py output (text + frame + screenshot)
     v1.jpg                    ← Nano Banana enhanced version 1
-    v1-resized.jpg            ← cropped/resized to App Store dimensions
+    v1-resized.jpg            ← resized to Play Store dimensions
     v2.jpg
     v2-resized.jpg
     v3.jpg
@@ -504,22 +500,22 @@ screenshots/
     02-search-any-card.jpg
 ```
 
-The `final/` folder is the only one the user needs to care about — it contains one approved, App Store-ready screenshot per benefit, numbered in order. The benefit subfolders contain all working versions and can be ignored or deleted after the set is complete.
+The `final/` folder is the only one the user needs to care about — it contains one approved, Play Store-ready screenshot per benefit, numbered in order. The benefit subfolders contain all working versions and can be ignored or deleted after the set is complete.
 
-Also tell the user exactly which App Store Connect display size slot each screenshot fits into.
+Also tell the user the exact dimensions and confirm they are ready to upload to Google Play Console.
 
 ### Save to Memory
 
 After each screenshot is generated (or after the full set is complete), save generation state to the Claude Code memory system. Create or update a memory file (e.g., `aso_generated_screenshots.md`) with:
 
 - **Brand colour**: name + hex code
-- **Target display size**: e.g., iPhone 6.7" (1290x2796)
+- **Target dimensions**: e.g., 1080×1920 (phone, portrait)
 - **For each generated screenshot**:
   - Benefit headline (ACTION VERB + DESCRIPTOR)
   - Benefit subfolder path (e.g., `screenshots/01-track-card-prices/`)
   - Which version the user chose (v1, v2, or v3)
   - Final file path (e.g., `screenshots/final/01-track-card-prices.jpg`)
-  - Simulator screenshot used (file path)
+  - App screenshot used (file path)
   - Breakout elements described in the prompt
   - Status: generated / approved / needs-redo
   - Any user feedback or change requests noted
@@ -531,7 +527,7 @@ Update this memory **incrementally** — after each screenshot is approved, add 
 Once ALL screenshots in the set are approved and saved to `final/`, generate a showcase image that displays up to 3 of the final screenshots side-by-side with a GitHub link. Use the showcase.py script in the skill directory:
 
 ```bash
-SKILL_DIR="$HOME/.claude/skills/aso-appstore-screenshots"
+SKILL_DIR="$HOME/.claude/skills/aso-playstore-screenshots"
 
 python3 "$SKILL_DIR/showcase.py" \
   --screenshots screenshots/final/01-*.jpg screenshots/final/02-*.jpg screenshots/final/03-*.jpg \
@@ -549,8 +545,8 @@ Show the showcase image to the user using the Read tool. This is a shareable pre
 - **Specific over generic**: "TRACK TRADING CARD PRICES" not "MANAGE YOUR STUFF"
 - **Action-oriented**: Every headline starts with a strong verb
 - **User-centric**: Frame everything from the downloader's perspective
-- **Conversion-focused**: Every decision should answer "will this make someone tap Download?"
+- **Conversion-focused**: Every decision should answer "will this make someone tap Install?"
 - The first screenshot is the most important — it must communicate the single biggest reason to download
-- Screenshots should tell a story when swiped through — each one reveals a new compelling reason
-- Always pair the most visually impactful simulator screenshot with the most important benefit
+- Screenshots should tell a story when scrolled through — each one reveals a new compelling reason
+- Always pair the most visually impactful app screenshot with the most important benefit
 - Never use an empty state, loading screen, or settings page as a screenshot — show the app at its best
