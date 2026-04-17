@@ -20,7 +20,7 @@ Four files + one asset make up the skill:
 
 ```bash
 # Requires: pip install Pillow
-# Requires: A heavy/black weight font (SF Pro Display Black, Inter Black, Roboto Black, or Noto Sans Black)
+# Requires: Montserrat Black font (install from Google Fonts or via: brew install --cask font-montserrat)
 
 python3 compose.py \
   --bg "#E31837" \
@@ -39,4 +39,4 @@ python3 compose.py \
 - **SKILL.md always generates 3 versions in parallel** for each benefit so the user can pick the best one.
 - **The resize step in SKILL.md is mandatory** after every `generate_image` or `edit_image` call — raw Nano Banana output may not be the exact dimensions for Google Play Console.
 - **Memory is central to the workflow** — benefits, screenshot assessments, pairings, brand colour, and generation state are all persisted so users can resume across conversations.
-- **Cross-platform font support** — compose.py searches for fonts in a priority order (SF Pro → Inter → Roboto → Noto Sans) so it works on both macOS and Linux.
+- **Montserrat Black is the primary font** — the industry standard for high-converting app store marketing screenshots. compose.py searches for it first, then falls back to SF Pro → Inter → Roboto for cross-platform support.

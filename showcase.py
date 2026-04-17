@@ -6,13 +6,27 @@ side-by-side on a white background with an optional GitHub link at the bottom.
 """
 
 import argparse
+import os
 from PIL import Image, ImageDraw, ImageFont
 
 # ── Layout ──────────────────────────────────────────────────────────
 PADDING = 60
 GAP = 40
 BOTTOM_BAR_H = 100
-FONT_PATH = "/Library/Fonts/SF-Pro-Display-Regular.otf"
+FONT_PATH = None
+_FONT_CANDIDATES = [
+    os.path.expanduser("~/Library/Fonts/Montserrat-Regular.ttf"),
+    "/Library/Fonts/Montserrat-Regular.ttf",
+    "/usr/share/fonts/truetype/montserrat/Montserrat-Regular.ttf",
+    "/usr/share/fonts/google-montserrat/Montserrat-Regular.ttf",
+    "/Library/Fonts/SF-Pro-Display-Regular.otf",
+]
+for _fp in _FONT_CANDIDATES:
+    if os.path.isfile(_fp):
+        FONT_PATH = _fp
+        break
+if FONT_PATH is None:
+    FONT_PATH = _FONT_CANDIDATES[0]
 FONT_SIZE_MAX = 48
 FONT_SIZE_MIN = 16
 TEXT_COLOUR = "#000000"

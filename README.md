@@ -25,16 +25,22 @@ pip install Pillow
 
 ### 3. Font requirement
 
-The skill uses a heavy/black weight sans-serif font for headline text. It searches for fonts in this order:
+The skill uses **Montserrat Black** for headline text — the industry-standard font for high-converting app store marketing screenshots. Install it from [Google Fonts](https://fonts.google.com/specimen/Montserrat), or on macOS:
+
+```bash
+brew install --cask font-montserrat
+```
+
+The skill searches for fonts in this order:
 
 | Priority | Font | Path |
 |----------|------|------|
-| 1 | SF Pro Display Black | `/Library/Fonts/SF-Pro-Display-Black.otf` (macOS) |
-| 2 | Inter Black | `/usr/share/fonts/truetype/inter/Inter-Black.ttf` |
-| 3 | Roboto Black | `/usr/share/fonts/truetype/roboto/Roboto-Black.ttf` |
-| 4 | Noto Sans Black | `/usr/share/fonts/google-noto/NotoSans-Black.ttf` |
-
-On macOS, install SF Pro from [Apple's developer fonts](https://developer.apple.com/fonts/). On Linux, install one of the alternatives via your package manager or download from [Google Fonts](https://fonts.google.com/).
+| 1 | **Montserrat Black** | `~/Library/Fonts/Montserrat-Black.ttf` (macOS) |
+| 2 | Montserrat Black | `/Library/Fonts/Montserrat-Black.ttf` (macOS system) |
+| 3 | Montserrat Black | `/usr/share/fonts/truetype/montserrat/Montserrat-Black.ttf` (Linux) |
+| 4 | SF Pro Display Black | `/Library/Fonts/SF-Pro-Display-Black.otf` (fallback) |
+| 5 | Inter Black | `/usr/share/fonts/truetype/inter/Inter-Black.ttf` (fallback) |
+| 6 | Roboto Black | `/usr/share/fonts/truetype/roboto/Roboto-Black.ttf` (fallback) |
 
 ### 4. Set up Gemini MCP (for AI enhancement)
 

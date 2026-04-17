@@ -256,7 +256,7 @@ Each screenshot follows this exact high-converting ASO format. **Consistency acr
 **Typography (MUST be uniform across ALL screenshots in the set)**:
 - **Line 1 — Action verb**: The single action verb (e.g., "TRACK", "SEARCH", "BOOST"). This is the BIGGEST, boldest text on the screenshot. White, uppercase, center-aligned. Same font, same size, same weight on every screenshot.
 - **Line 2 — Benefit descriptor**: The rest of the headline (e.g., "TRADING CARD PRICES", "ANY VERSE IN SECONDS"). Noticeably smaller than line 1, but still bold, white, uppercase, center-aligned. Same font, same size, same weight on every screenshot.
-- **Font**: Heavy/black weight sans-serif (e.g., Roboto Black, Inter Black, SF Pro Display Black, or similar high-impact font). Not just bold — heavy/black weight for maximum impact.
+- **Font**: Heavy/black weight sans-serif (e.g., Montserrat Black, Inter Black, or similar high-impact font). Not just bold — heavy/black weight for maximum impact.
 - **Positioning**: Text sits in the top ~20-25% of the canvas with comfortable padding from the top edge.
 - **Horizontal safe area**: All text MUST stay well within the centre ~80% of the canvas width. Leave generous horizontal margins on both sides — at least 10% padding from each edge. Keep headlines short enough to fit comfortably within this safe zone. If a headline is too long, break it across more lines rather than extending to the edges.
 

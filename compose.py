@@ -35,12 +35,18 @@ DESC_LINE_GAP = 16
 MAX_TEXT_W = int(CANVAS_W * 0.92)
 MAX_VERB_W = int(CANVAS_W * 0.92)
 
-# Font: try SF Pro Display first (macOS), then fall back to common alternatives
+# Font: Montserrat Black (primary), with fallbacks for cross-platform support
 FONT_CANDIDATES = [
+    # macOS — Homebrew or manual install
+    os.path.expanduser("~/Library/Fonts/Montserrat-Black.ttf"),
+    "/Library/Fonts/Montserrat-Black.ttf",
+    # Linux — common package manager paths
+    "/usr/share/fonts/truetype/montserrat/Montserrat-Black.ttf",
+    "/usr/share/fonts/google-montserrat/Montserrat-Black.ttf",
+    # Fallbacks if Montserrat not installed
     "/Library/Fonts/SF-Pro-Display-Black.otf",
     "/usr/share/fonts/truetype/inter/Inter-Black.ttf",
     "/usr/share/fonts/truetype/roboto/Roboto-Black.ttf",
-    "/usr/share/fonts/google-noto/NotoSans-Black.ttf",
 ]
 FONT_PATH = None
 for _fp in FONT_CANDIDATES:
