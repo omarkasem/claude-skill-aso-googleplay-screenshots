@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageChops
 # ── Device dimensions ───────────────────────────────────────────────
 # Width is ~80% of 1080 canvas, matching reference screenshots
 DEVICE_W = 864
-DEVICE_H = 1920           # tall enough to bleed off any canvas
+DEVICE_H = 2400           # tall enough to bleed off any canvas
 DEVICE_CORNER_R = 50
 BEZEL = 12
 SCREEN_CORNER_R = 38

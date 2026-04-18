@@ -23,7 +23,7 @@ SCREEN_W = DEVICE_W - 2 * BEZEL    # 840
 SCREEN_CORNER_R = 38
 
 # ── Layout ──────────────────────────────────────────────────────────
-DEVICE_Y = 500                       # device top position (fixed)
+DEVICE_Y = 420                       # device top position (fixed)
 MIN_TEXT_DEVICE_GAP = 30             # minimum gap between text bottom and device top
 
 # ── Typography ──────────────────────────────────────────────────────
@@ -123,7 +123,7 @@ def compose(bg_hex, verb, desc, screenshot_path, output_path):
 
     # Device at fixed Y; text starts at fixed position
     device_y = DEVICE_Y
-    text_top = 130
+    text_top = 120
 
     # Draw text at centered position
     y = text_top
